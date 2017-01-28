@@ -38,6 +38,7 @@ public class Timestampable implements Serializable {
   @PrePersist
   protected void onCreate() {
         setCreatedAt(new Date());
+        setUpdatedAt(new Date());
   }
 
   @PreUpdate

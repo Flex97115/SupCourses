@@ -29,7 +29,7 @@ public class User extends Timestampable {
     
     @OneToMany(mappedBy = "writer")
     private List<Course> courses;
-
+    
 
     /**
      * @return the email

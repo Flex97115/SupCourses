@@ -6,6 +6,7 @@
 package com.supinfo.supcourses.entity;
 
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -15,7 +16,9 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Role extends Timestampable{
+    @Column(unique = true)
     private String readableName;
+    
     private RoleEnum machineName;
     
     @OneToMany

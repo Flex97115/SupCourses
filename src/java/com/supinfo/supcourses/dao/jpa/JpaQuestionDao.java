@@ -36,8 +36,4 @@ public class JpaQuestionDao implements QuestionDao {
     public void removeQuestion(Question question) {
         em.remove(question);
     }
-    
-    
-    
-    
 }
