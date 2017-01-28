@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.supinfo.supcourses.web.servlet;
+package com.supinfo.supcourses.web.servlet.listener;
 
 import com.supinfo.supcourses.entity.Role;
 import com.supinfo.supcourses.entity.User;
