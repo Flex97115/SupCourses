@@ -77,5 +77,11 @@ public class JpaUserDao implements UserDao {
             return null;
         }
     }
+
+    @Override
+    public User updateUser(User user) {
+        em.merge(user);
+        return user;
+    }
     
 }

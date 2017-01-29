@@ -45,4 +45,8 @@ public class UserService {
         return userDao.authentify(mail, password);
     }
     
+    public User updateUser(User user){
+        return userDao.updateUser(user);
+    }
+    
 }

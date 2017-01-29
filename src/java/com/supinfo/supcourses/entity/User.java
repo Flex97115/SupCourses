@@ -9,6 +9,7 @@ import com.sun.xml.internal.ws.util.StringUtils;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
@@ -30,6 +31,9 @@ public class User extends Timestampable {
     
     @ManyToOne
     private Role role;
+    
+    @ManyToMany
+    private List<Course> viewedCourses;
     
     @OneToMany(mappedBy = "writer")
     private List<Course> courses;
@@ -123,6 +127,20 @@ public class User extends Timestampable {
      */
     public void setCourses(List<Course> courses) {
         this.courses = courses;
+    }
+
+    /**
+     * @return the viewedCourses
+     */
+    public List<Course> getViewedCourses() {
+        return viewedCourses;
+    }
+
+    /**
+     * @param viewedCourses the viewedCourses to set
+     */
+    public void setViewedCourses(List<Course> viewedCourses) {
+        this.viewedCourses = viewedCourses;
     }
     
 }

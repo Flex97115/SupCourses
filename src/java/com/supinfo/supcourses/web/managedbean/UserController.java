@@ -5,7 +5,9 @@
  */
 package com.supinfo.supcourses.web.managedbean;
 
+import com.supinfo.supcourses.entity.Course;
 import com.supinfo.supcourses.entity.User;
+import com.supinfo.supcourses.service.CourseService;
 import com.supinfo.supcourses.service.UserService;
 import java.io.Serializable;
 import java.util.Map;
@@ -24,7 +26,7 @@ import javax.faces.context.FacesContext;
 public class UserController implements Serializable {
     @EJB
     private UserService userService;
-    
+        
     private User user;
 
     /**

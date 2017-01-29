@@ -6,13 +6,20 @@
 package com.supinfo.supcourses.web.managedbean;
 
 import com.supinfo.supcourses.entity.Course;
+import com.supinfo.supcourses.entity.User;
 import com.supinfo.supcourses.service.CourseService;
+import com.supinfo.supcourses.service.UserService;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.view.ViewScoped;
@@ -33,9 +40,13 @@ public class CoursesController implements Serializable {
     
     private String courseId;
     
+    private User user;
 
     @EJB
     private CourseService courseService;
+    
+    @EJB
+    private UserService userService;
     
     @PostConstruct
     public void init() {
@@ -43,11 +54,38 @@ public class CoursesController implements Serializable {
         coursesModel = new ListDataModel<>(courses);
     }
    
+        /**
+     * @return the user
+     */
+    public User getUser() {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        Map<String, Object> sessionMap = externalContext.getSessionMap();
+        return (User) sessionMap.get("user");
+    }
     
+    public boolean isViewedCourse(){
+        Course c = coursesModel.getRowData();
+        List<Long> cIds =  getUser().getViewedCourses().stream()
+                .map(c1 -> { return c1.getId();})
+                .collect(Collectors.toList());
+        return cIds.contains(c.getId());
+    }
     
     public String goToCourse(){        
         course = coursesModel.getRowData();
         setCourseId(course.getId().toString());
+        User current = getUser();
+        List<Long> cIds =  getUser().getViewedCourses().stream()
+            .map(c1 -> { return c1.getId();})
+            .collect(Collectors.toList());
+        if(!cIds.contains(course.getId())){
+            if(current.getViewedCourses().isEmpty()){
+                current.setViewedCourses(Arrays.asList(course));
+            } else {
+                current.getViewedCourses().add(course);
+            }
+            userService.updateUser(current);
+        }
         return course != null ? "course?faces-redirect=true&includeViewParams=true" : "";
     }
     

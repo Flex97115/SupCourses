@@ -26,4 +26,6 @@ public interface UserDao {
     User findUserByMail(String mail);
     
     User authentify(String mail, String password);
+    
+    User updateUser(User user);
 }
