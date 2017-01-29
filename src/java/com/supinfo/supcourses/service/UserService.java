@@ -37,4 +37,12 @@ public class UserService {
         userDao.removeUser(user);
     }
     
+    public User findUserByMail(String mail){
+        return userDao.findUserByMail(mail);
+    }
+    
+    public User authentify(String mail, String password){
+        return userDao.authentify(mail, password);
+    }
+    
 }

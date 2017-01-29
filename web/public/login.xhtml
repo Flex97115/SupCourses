@@ -26,7 +26,7 @@ and open the template in the editor.
                 <h:outputText value="Email :"/>
               </b:column>
               <b:column medium-screen="4">
-                <b:inputText placeholder="Email" />
+                <b:inputText placeholder="Email" value="#{Login.email}" id="email" />
               </b:column>
             </b:row>
             <b:row>
@@ -34,12 +34,17 @@ and open the template in the editor.
                 <h:outputText value="Password:" />
               </b:column>
               <b:column medium-screen="4">
-                <b:inputSecret placeholder="Password" />
+                  <b:inputSecret placeholder="Password" value="#{Login.password}" id="password" />
               </b:column>
             </b:row>
             <b:row>
               <b:column span="2" offset="2">
-                <b:commandButton value="login" look="primary" style="width:100%" />
+                  <b:commandButton value="login" look="primary" style="width:100%" action="#{Login.login()}" />
+              </b:column>
+            </b:row>
+            <b:row>
+            <b:column medium-screen="2">
+                <h:outputText value="#{Login.message}"/>
               </b:column>
             </b:row>
         </b:container>

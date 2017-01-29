@@ -6,60 +6,78 @@
 package com.supinfo.supcourses.web.managedbean;
 
 import com.supinfo.supcourses.entity.User;
-import com.supinfo.supcourses.service.RoleService;
 import com.supinfo.supcourses.service.UserService;
 import java.io.Serializable;
 import java.util.Map;
-import javax.faces.bean.ManagedBean;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
-import javax.faces.view.facelets.FaceletContext;
 
 /**
  *
  * @author Gery
  */
-@ManagedBean(name = "Subscribe")
+@ManagedBean(name = "Login")
 @ViewScoped
-public class SubscribeController implements Serializable {
+public class LoginController implements Serializable {
     
     private User user;
+    
+    private String password;
+    
+    private String email;
     
     private String message;
     
     @EJB
     private UserService userService;
     
-    @EJB
-    private RoleService roleService;
-    
-    @PostConstruct
-    public void init() { 
-        if(user == null){
-            user = new User();
-        }
-    }
-    
-    public String submit() {
-        if(userService.findUserByMail(user.getEmail()) == null){
-            user.setRole(roleService.getStudentRole());
-            userService.addUser(user);
+    public String login(){
+        User loggedUser = userService.authentify(this.email, this.password);
+        if( loggedUser != null){
+            user = loggedUser;
             ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
             Map<String, Object> sessionMap = externalContext.getSessionMap();
             sessionMap.put("email", user.getEmail());
             return "/private/index?faces-redirect=true";
-        } else {
-             setMessage("Email already exist.");
-             user = new User();
-             return "";
-        }
+        } 
+        user = new User();
+        setMessage("invalid password or email.");
+        return "";
     }
     
-     public User getUser() {
+    public User getUser() {
         return user;
+    }
+
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**
@@ -75,7 +93,6 @@ public class SubscribeController implements Serializable {
     public void setMessage(String message) {
         this.message = message;
     }
-     
-     
+    
     
 }

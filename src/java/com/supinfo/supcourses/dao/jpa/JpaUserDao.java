@@ -10,9 +10,11 @@ import com.supinfo.supcourses.entity.User;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -47,6 +49,33 @@ public class JpaUserDao implements UserDao {
     @Override
     public void removeUser(User user) {
         em.remove(this);
+    }
+
+    @Override
+    public User findUserByMail(String mail) {
+        try {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<User> cq = cb.createQuery(User.class);
+        Root<User> user = cq.from(User.class);
+        cq.where(cb.equal(user.get("email"), mail.toLowerCase()));
+        return em.createQuery(cq).getSingleResult();
+        } catch (NoResultException e){
+            return null;
+        }
+        
+    }
+
+    @Override
+    public User authentify(String mail, String password) {
+        try {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<User> cq = cb.createQuery(User.class);
+        Root<User> user = cq.from(User.class);
+        cq.where(cb.and(cb.equal(user.get("email"), mail.toLowerCase()),cb.equal(user.get("password"), password)));
+        return em.createQuery(cq).getSingleResult();
+        } catch (NoResultException e){
+            return null;
+        }
     }
     
 }

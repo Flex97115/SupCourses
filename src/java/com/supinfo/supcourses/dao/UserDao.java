@@ -23,4 +23,7 @@ public interface UserDao {
     
     void removeUser(User user);   
     
+    User findUserByMail(String mail);
+    
+    User authentify(String mail, String password);
 }

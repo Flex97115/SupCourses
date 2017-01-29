@@ -5,10 +5,13 @@
  */
 package com.supinfo.supcourses.entity;
 
+import com.sun.xml.internal.ws.util.StringUtils;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 
 /**
  *
@@ -17,8 +20,9 @@ import javax.persistence.OneToMany;
 @Entity
 public class User extends Timestampable {
    
-    
+    @Column(unique = true)
     private String email;
+    
     private String firstName;
     private String lastName;
     
@@ -30,6 +34,12 @@ public class User extends Timestampable {
     @OneToMany(mappedBy = "writer")
     private List<Course> courses;
     
+    @PrePersist
+    protected void normalize() {
+            setEmail(email.toLowerCase());
+            setFirstName(StringUtils.capitalize(firstName));
+            setLastName(lastName.toUpperCase());
+      }
 
     /**
      * @return the email

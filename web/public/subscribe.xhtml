@@ -57,6 +57,11 @@ and open the template in the editor.
                     <b:commandButton value="Register" action="#{Subscribe.submit}" look="primary" style="width:100%" />
                 </b:column>
             </b:row>
+            <b:row>
+            <b:column medium-screen="2">
+                <h:outputText value="#{Subscribe.message}"/>
+              </b:column>
+            </b:row>
             </b:container>
         </b:form>
         
