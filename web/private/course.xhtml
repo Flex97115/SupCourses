@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Course</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <f:metadata>
+            <f:viewParam name="courseId" value="#{Courses.courseId}" />
+            <f:event type="preRenderView" listener="#{Course.loadData(Courses.courseId)}"/>
+        </f:metadata>
+    </h:head>
+    <h:body>
+        <ui:include src="header.xhtml" />
+        <b:container fluid="true" style="padding: 50px;">
+        <b:row>
+            <h1>#{Course.course.title}</h1>
+        </b:row>
+        <b:row>
+            <h:outputText value="#{Course.course.content}"></h:outputText>
+        </b:row>
+        </b:container>
+        <b:container>
+            <b:form>
+            <b:commandButton value="Quizz" look="warning" style="width:100%" action="#{Course.goToQuiz}"></b:commandButton>
+            </b:form>
+        </b:container>
+    </h:body>
+</html>

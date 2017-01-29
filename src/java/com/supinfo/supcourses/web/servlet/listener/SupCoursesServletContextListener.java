@@ -5,10 +5,23 @@
  */
 package com.supinfo.supcourses.web.servlet.listener;
 
+import com.sun.faces.facelets.util.Path;
+import com.supinfo.supcourses.entity.Course;
 import com.supinfo.supcourses.entity.Role;
 import com.supinfo.supcourses.entity.User;
+import com.supinfo.supcourses.service.CourseService;
 import com.supinfo.supcourses.service.RoleService;
 import com.supinfo.supcourses.service.UserService;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import static java.util.stream.Collectors.joining;
+import java.util.stream.Stream;
 import javax.ejb.EJB;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -24,6 +37,9 @@ public class SupCoursesServletContextListener implements ServletContextListener 
     
     @EJB
     private RoleService roleService;
+    
+    @EJB
+    private CourseService courseService;
     
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -68,6 +84,21 @@ public class SupCoursesServletContextListener implements ServletContextListener 
             writer.setPassword("writer");
             writer.setRole(roleService.getWriterRole());
             userService.addUser(writer);
+        }
+        if(courseService.getAllCourses().isEmpty()){
+            String relativeWebPath = "/resources/txt/1.txt";
+            String absoluteDiskPath = sce.getServletContext().getRealPath(relativeWebPath);
+            java.nio.file.Path path = Paths.get(absoluteDiskPath);
+            try {
+                String content = Files.lines(path, StandardCharsets.UTF_8).collect(joining(" "));
+                Course course = new Course();
+                course.setTitle("Comment extraire des données d’un fichier audio ?");
+                course.setContent(content);
+                courseService.addCourse(course);
+              
+            } catch (IOException ex) {
+                Logger.getLogger(SupCoursesServletContextListener.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
     }

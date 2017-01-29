@@ -1,0 +1,42 @@
+Introduction
+
+Cet article s’adresse aux personnes désirants extraire des données de leurs fichiers audio afin d’exploiter ces données d’une manière ou d’une autre ensuite. Nous allons faire cela avec le langage de programmation nommé Python, il n’est pas nécessaire d’avoir une connaissance approfondie du langage pour suivre cet article. Pour extraire les données du fichier audio, nous allons utiliser des outils fournis par Essentia (http://essentia.upf.edu/).
+Que pouvons-nous extraire d’un fichier audio ?
+Il y a d’innombrable donnée dans un fichier audio qui peuvent vous êtres plus ou moins utile selon vos besoins. Par exemple, vous pouvez en extraire les battements par minute ce qui vous permettra de savoir quel type de musique est-ce en fonction du nombre de battement. Essentia est un outil très utile car il propose des algorithmes permettant de savoir quelle émotion ressort le plus de votre musique, par exemple si votre musique est triste ou si celle-ci est plutôt joyeuse, vous pourrez aussi savoir si la voix est une voix féminine ou masculine, si votre morceau est un morceau dansable, etc.
+
+Essentia
+
+Afin d’installer Essentia, il vous faudra installer ses dépendances. Ouvrez donc un terminal et tapez :
+sudo apt-get install build-essential libyaml-dev libfftw3-dev libavcodec-dev libavformat-dev libavutil-dev libavresample-dev python-dev libsamplerate0-dev libtag1-dev
+Ensuite si vous n’avez pas python d’installer sur votre machine, il faut l’installer. Nous allons utiliser la version 2 de Python car Essentia n’est pas encore compatible avec la version 3 de Python.
+Vous pouvez télécharger python ici : https://www.python.org/downloads/release/python-2712/
+ou l’installer via votre terminal :
+sudo apt-get install python
+Après avoir installé python, il faut installer les dépendances Python dont Essentia aura besoin. Tapez donc cette commande dans votre terminal :
+sudo apt-get install python-numpy-dev python-numpy python-yaml
+Maintenant que nous avons toutes les dépendances, nous allons compiler Essentia sur notre machine afin de pouvoir enfin l’utiliser. Pour cela rendez-vous sur le dépôt github d’Essentia : https://github.com/MTG/essentia . Téléchargez le dépôt au format Zip ou vous pouvez aussi cloner ce dépôt depuis votre console si vous possédez git d’installé sur votre machine. Si vous avez choisi la version zippée, vous devez extraire les fichiers contenus dans le zip. Une fois cela fait récupérez votre console et rendez-vous dans le dossier précédemment extrait du zip avec la commande « cd ». Une fois dans le dossier nous allons exécuter cette commande :
+./waf configure --mode=release --build-static --with-python --with-examples --with-gaia
+Avec les paramètres passés, on installe Essentia afin de pouvoir l’utiliser avec Python et Gaïa (--with-python, --with-gaia). Mais l’on installe aussi les algorithmes déjà fourni par Essentia pour l’extraction de donnée avec ce paramètre (--with-examples) . Enfin exécutez ces commandes afin de finaliser l'installation :
+./waf
+sudo ./waf install
+Nous avons installé Essentia et Gaïa, plus qu’une étape afin de s’attaquer au code avec Python.
+
+Extraction de données
+
+Nous allons créer un petit programme en python nous permettant de récupérer sous forme de Json les données d’un fichier audio passé en paramètre. Choisissez l’éditeur de texte ou l’IDE de votre choix et créez un premier fichier « .py » dans le répertoire de votre projet à la racine au côté du dossier « svm_models ». Nommé le comme bon vous semble, pour ma part ce sera « main.py ». D’abord, nous allons écrire le script permettant de récupérer le fichier audio passé en paramètre à l’appel du fichier Python dans la console. Cela ce traduit par cela :
+
+Ici nous importons la bibliothèque « sys » fournis avec Python afin de récupérer l’argument passé en paramètre. Ensuite une fois le chemin du fichier audio récupérer nous allons simplement lancer deux commande système depuis Python.
+
+streaming_extractor_music et essentia_streaming_extractor_music_svm sont les commandes systèmes que l’on va lancer, celle-ci ont été installé avec Essentia. Premièrement nous lançons la commande « streaming_extractor_music » et on lui passe en paramètre le chemin vers lequel pointe notre fichier audio et le fichier de destination de l’extraction, « extraction.json » dans notre cas. Cette commande va extraire les données dans notre fichier audio et les stocker dans un fichier Json nommé extraction. Pour en savoir plus sur les données extraites par cette commande voir (http://essentia.upf.edu/documentation/streaming_extractor_music.html ). Grâce à cette commande on possède bon nombre d’information sur le morceau, si on est un spécialiste, on peut déjà exploiter ces données. Pour quelqu’un ne travaillant pas dans le domaine musical la plupart de ces données sont pas très compréhensible. Donc pour cela nous allons exécuter une seconde commande « essentia_streaming_extractor_music_svm ». Celle-ci va interpréter les données obtenues grâce à l’extracteur et nous les ressortir dans un fichier Json nommé « classifier.json » dans notre cas, qui pourra plus facilement être exploité par quelqu’un qui n’est pas un spécialiste dans le domaine musical. Cette commande prend en paramètre le json obtenu avec l’extracteur et le nom du fichier de sortie. Contenu final du fichier main.py :
+
+Maintenant rendez-vous dans le dossier de votre projet à l’aide d’un terminal et exécutez la commande suivante :
+python main.py /cehmin/de/votre/fichier/audio
+Après avoir exécuter cette commande vous assisterez à la création de deux fichiers json dans le répertoire de votre projet. Dans le premier nommé « extraction.json » vous retrouverez pas mal de donnée comme par exemple les metadata de votre fichier audio entre autres.
+
+Mais beaucoup de ces données exceptés les metadata ne sont pas très utile sans traitement. Dans l’autre fichier nommé « classifier.json » vous allez retrouver des données plus compréhensible et plus facile d’utilisation.
+
+Par exemple ici, nous savons que notre morceau est dansable et que c’est une personne de sexe masculin qui l’interprète. Ensuite nous avons aussi tout un tas de donnée indiquant les sentiments que notre musique peut évoquer.
+
+Conclusion
+
+Voilà je vous ai donné les clés afin d’extraire simplement des données d’un fichier audio quel qu’en soit le format, à vous maintenant d’exploiter toutes ces données comme bon vous semble.

@@ -5,6 +5,7 @@
  */
 package com.supinfo.supcourses.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -15,7 +16,12 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class Course extends Timestampable  {
+    
+    
+    private String title;
         
+   
+    @Column(length = 10000)
     private String content;
     
     @OneToOne
@@ -42,7 +48,7 @@ public class Course extends Timestampable  {
      * @return the quiz
      */
     public Quiz getQuiz() {
-        return quiz;
+        return quiz; 
     }
 
     /**
@@ -64,6 +70,20 @@ public class Course extends Timestampable  {
      */
     public void setWriter(User writer) {
         this.writer = writer;
+    }
+
+    /**
+     * @return the title
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * @param title the title to set
+     */
+    public void setTitle(String title) {
+        this.title = title;
     }
     
     
