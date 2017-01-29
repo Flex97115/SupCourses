@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.Map;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -20,7 +21,7 @@ import javax.faces.view.ViewScoped;
  * @author Gery
  */
 @ManagedBean(name = "Login")
-@ViewScoped
+@SessionScoped
 public class LoginController implements Serializable {
     
     private User user;
@@ -40,7 +41,7 @@ public class LoginController implements Serializable {
             user = loggedUser;
             ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
             Map<String, Object> sessionMap = externalContext.getSessionMap();
-            sessionMap.put("email", user.getEmail());
+            sessionMap.put("user", user);
             return "/private/index?faces-redirect=true";
         } 
         user = new User();

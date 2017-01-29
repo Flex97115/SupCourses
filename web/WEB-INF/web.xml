@@ -24,4 +24,9 @@
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
+    <display-name>Filters</display-name>
+    <filter-mapping>
+        <filter-name>authentificationFilter</filter-name>
+        <url-pattern>/faces/private/*</url-pattern>
+    </filter-mapping>
     </web-app>

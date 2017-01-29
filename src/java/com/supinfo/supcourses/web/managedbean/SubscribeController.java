@@ -13,6 +13,7 @@ import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -23,7 +24,7 @@ import javax.faces.view.facelets.FaceletContext;
  * @author Gery
  */
 @ManagedBean(name = "Subscribe")
-@ViewScoped
+@SessionScoped
 public class SubscribeController implements Serializable {
     
     private User user;
@@ -49,7 +50,7 @@ public class SubscribeController implements Serializable {
             userService.addUser(user);
             ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
             Map<String, Object> sessionMap = externalContext.getSessionMap();
-            sessionMap.put("email", user.getEmail());
+            sessionMap.put("user", user);
             return "/private/index?faces-redirect=true";
         } else {
              setMessage("Email already exist.");
