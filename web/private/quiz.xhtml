@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Quiz</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <f:metadata>
+            <f:viewParam name="quizId" value="#{Course.quizId}" />
+            <f:event type="preRenderView" listener="#{Quiz.loadData(Course.quizId)}"/>
+        </f:metadata>
+    </h:head>
+    <h:body>
+        <ui:include src="header.xhtml" />
+        <b:container fluid="true" style="padding: 50px;">
+            <b:form>
+            <ui:repeat value="#{Quiz.questions}" var="q">
+                <b:row>
+                    <b:column medium-screen="4">
+                        <h3>#{q.content}</h3>
+                        <b:selectOneMenu value="#{q.userResponse}">
+                            <f:selectItem itemLabel="True" itemValue="true"></f:selectItem>
+                            <f:selectItem itemLabel="False" itemValue="false"></f:selectItem>
+                        </b:selectOneMenu>
+                    </b:column>
+                </b:row>
+            </ui:repeat>
+            <b:column medium-screen="3">
+                <b:commandButton value="Submit" look="primary" style="width:100%" action="#{Quiz.submit()}" update="@form" />
+            </b:column>               
+            </b:form>
+        </b:container>
+    </h:body>
+</html>

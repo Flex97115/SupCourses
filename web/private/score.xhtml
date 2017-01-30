@@ -9,29 +9,22 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>Course</title>
+        <title>Quiz</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <f:metadata>
-            <f:viewParam name="courseId" value="#{Courses.courseId}" />
-            <f:event type="preRenderView" listener="#{Course.loadData(Courses.courseId)}"/>
+            <f:viewParam name="score" value="#{Quiz.score}" />
+            <f:viewParam name="numQuestion" value="#{Quiz.numQuestion}" />
+            <f:event type="preRenderView" listener="#{Score.loadData(Quiz.score, Quiz.numQuestion)}"/>
         </f:metadata>
     </h:head>
     <h:body>
         <ui:include src="header.xhtml" />
         <b:container fluid="true" style="padding: 50px;">
-        <b:row>
-            <h1>#{Course.course.title}</h1>
-        </b:row>
-        <b:row>
-            <h:outputText value="#{Course.course.content}"></h:outputText>
-        </b:row>
-        </b:container>
-        <b:container>
-            <b:form>
-            <b:commandButton value="Quiz" look="warning" style="width:100%" action="#{Course.goToQuiz}"></b:commandButton>
-            </b:form>
+            <h2>Vous avez un score de : </h2>
+            <h3 style="color: red;">#{Score.score} / #{Score.numQuestion}</h3>
         </b:container>
     </h:body>
 </html>

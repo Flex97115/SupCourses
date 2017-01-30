@@ -37,4 +37,8 @@ public class QuizService {
         quizDao.removeQuiz(quiz);
     }
     
+    public Quiz updateQuiz(Quiz quiz){
+        return quizDao.updateQuiz(quiz);
+    }
+    
 }

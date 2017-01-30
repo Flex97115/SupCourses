@@ -11,16 +11,20 @@ import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.view.ViewScoped;
 
 /**
  *
  * @author Gery
  */
 @ManagedBean(name = "Course")
-@RequestScoped
+@SessionScoped
 public class CourseController implements Serializable {
     
     private Course course;
+    
+    private String quizId;
     
     
     @EJB
@@ -29,11 +33,12 @@ public class CourseController implements Serializable {
     
     public void loadData(String courseId){     
         Long id = Long.parseLong(courseId);
-        course = courseService.findCourseById(id);
+        this.course = courseService.findCourseById(id);
     }
     
-    public void goToQuiz(){
-        
+    public String goToQuiz(){
+        quizId = getCourse().getQuiz().getId().toString();
+        return "quiz?faces-redirect=true&includeViewParams=true";
     }
 
     /**
@@ -44,10 +49,17 @@ public class CourseController implements Serializable {
     }
 
     /**
-     * @param course the course to set
+     * @return the quizId
      */
-    public void setCourse(Course course) {
-        this.course = course;
+    public String getQuizId() {
+        return quizId;
+    }
+
+    /**
+     * @param quizId the quizId to set
+     */
+    public void setQuizId(String quizId) {
+        this.quizId = quizId;
     }
         
 }

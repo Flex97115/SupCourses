@@ -48,6 +48,12 @@ public class JpaQuizDao implements QuizDao{
     public void removeQuiz(Quiz quiz) {
         em.remove(quiz);
     }
+
+    @Override
+    public Quiz updateQuiz(Quiz quiz) {
+        em.merge(quiz);
+        return quiz;
+    }
     
     
 }

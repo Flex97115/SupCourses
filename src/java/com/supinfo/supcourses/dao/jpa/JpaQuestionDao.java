@@ -36,4 +36,10 @@ public class JpaQuestionDao implements QuestionDao {
     public void removeQuestion(Question question) {
         em.remove(question);
     }
+
+    @Override
+    public Question updateQuestion(Question question) {
+        em.merge(question);
+        return question;
+    }
 }

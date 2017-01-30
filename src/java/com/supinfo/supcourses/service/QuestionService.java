@@ -31,4 +31,7 @@ public class QuestionService {
         return questionDao.findQuestionById(questionId);
     }
     
+    public Question updateQuestion(Question question){
+        return questionDao.updateQuestion(question);
+    }
 }

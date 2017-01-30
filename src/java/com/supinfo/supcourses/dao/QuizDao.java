@@ -20,6 +20,8 @@ public interface QuizDao {
     
     Quiz findQuizById(Long quizId);
     
+    Quiz updateQuiz(Quiz quiz);
+    
     void removeQuiz(Quiz quiz);
     
 }

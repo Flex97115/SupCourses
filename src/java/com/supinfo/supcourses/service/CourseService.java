@@ -37,4 +37,8 @@ public class CourseService {
         return courseDao.findCourseById(courseId);
     }
     
+    public Course updateCourse(Course course){
+        return courseDao.updateCourse(course);
+    }
+    
 }

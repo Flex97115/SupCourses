@@ -65,9 +65,12 @@ public class CoursesController implements Serializable {
     
     public boolean isViewedCourse(){
         Course c = coursesModel.getRowData();
+        
+        //Can't compare course without overwriting method use id instead
         List<Long> cIds =  getUser().getViewedCourses().stream()
                 .map(c1 -> { return c1.getId();})
                 .collect(Collectors.toList());
+        
         return cIds.contains(c.getId());
     }
     
@@ -75,9 +78,12 @@ public class CoursesController implements Serializable {
         course = coursesModel.getRowData();
         setCourseId(course.getId().toString());
         User current = getUser();
+        
+        //Can't compare course without overwriting method use id instead
         List<Long> cIds =  getUser().getViewedCourses().stream()
             .map(c1 -> { return c1.getId();})
             .collect(Collectors.toList());
+        
         if(!cIds.contains(course.getId())){
             if(current.getViewedCourses().isEmpty()){
                 current.setViewedCourses(Arrays.asList(course));

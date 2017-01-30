@@ -47,5 +47,11 @@ public class JpaCourseDao implements CourseDao {
     public void removeCourse(Course course) {
         em.remove(course);
     }
+
+    @Override
+    public Course updateCourse(Course course) {
+        em.merge(course);
+        return course;
+    }
     
 }

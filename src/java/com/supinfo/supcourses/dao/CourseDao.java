@@ -24,4 +24,6 @@ public interface CourseDao {
     
     void removeCourse(Course course);
     
+    Course updateCourse(Course course);
+    
 }

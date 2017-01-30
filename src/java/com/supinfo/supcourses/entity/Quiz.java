@@ -6,7 +6,9 @@
 package com.supinfo.supcourses.entity;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -17,8 +19,10 @@ import javax.persistence.OneToOne;
 @Entity
 public class Quiz extends Timestampable {
     
-    @OneToMany
+    
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Question> questions;
+    
     
     @OneToOne
     private Course course;

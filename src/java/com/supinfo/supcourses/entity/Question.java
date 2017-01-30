@@ -20,8 +20,20 @@ public class Question extends Timestampable {
     
     private boolean response;
     
+    private boolean userResponse = true;
+    
     @ManyToOne
     private Quiz quiz;
+    
+    public Question(){
+        
+    }
+    
+    public Question(String content, boolean response ){
+        this.content = content;
+        this.response = response;
+    }
+    
     
     /**
      * @return the content
@@ -63,6 +75,20 @@ public class Question extends Timestampable {
      */
     public void setQuiz(Quiz quiz) {
         this.quiz = quiz;
+    }
+
+    /**
+     * @return the userResponse
+     */
+    public boolean isUserResponse() {
+        return userResponse;
+    }
+
+    /**
+     * @param userResponse the userResponse to set
+     */
+    public void setUserResponse(boolean userResponse) {
+        this.userResponse = userResponse;
     }
     
     
