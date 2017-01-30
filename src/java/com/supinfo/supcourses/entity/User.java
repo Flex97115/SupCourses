@@ -5,7 +5,8 @@
  */
 package com.supinfo.supcourses.entity;
 
-import com.sun.xml.internal.ws.util.StringUtils;
+
+import com.sun.xml.ws.util.StringUtils;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

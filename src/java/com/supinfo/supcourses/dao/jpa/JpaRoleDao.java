@@ -8,7 +8,7 @@ package com.supinfo.supcourses.dao.jpa;
 import com.supinfo.supcourses.dao.RoleDao;
 import com.supinfo.supcourses.entity.Role;
 import com.supinfo.supcourses.entity.Role.RoleEnum;
-import com.supinfo.supcourses.entity.User;
+import com.supinfo.supcourses.entity.Role_;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -46,7 +46,7 @@ public class JpaRoleDao implements RoleDao {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Role> cq = cb.createQuery(Role.class);
         Root<Role> role = cq.from(Role.class);
-        cq.where(cb.equal(role.get("readableName"), RoleEnum.ADMIN.getName()));
+        cq.where(cb.equal(role.get(Role_.readableName), RoleEnum.ADMIN.getName()));
         return em.createQuery(cq).getSingleResult();
     }
 
@@ -55,7 +55,7 @@ public class JpaRoleDao implements RoleDao {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Role> cq = cb.createQuery(Role.class);
         Root<Role> role = cq.from(Role.class);
-        cq.where(cb.equal(role.get("readableName"), RoleEnum.STUDENT.getName()));
+        cq.where(cb.equal(role.get(Role_.readableName), RoleEnum.STUDENT.getName()));
         return em.createQuery(cq).getSingleResult();
     }
 
@@ -64,7 +64,7 @@ public class JpaRoleDao implements RoleDao {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Role> cq = cb.createQuery(Role.class);
         Root<Role> role = cq.from(Role.class);
-        cq.where(cb.equal(role.get("readableName"), RoleEnum.WRITER.getName()));
+        cq.where(cb.equal(role.get(Role_.readableName), RoleEnum.WRITER.getName()));
         return em.createQuery(cq).getSingleResult();
     }
     

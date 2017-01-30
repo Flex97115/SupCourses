@@ -5,7 +5,7 @@
  */
 package com.supinfo.supcourses.web.filter;
 
-import com.sun.xml.internal.ws.util.StringUtils;
+import com.sun.xml.ws.util.StringUtils;
 import com.supinfo.supcourses.entity.User;
 import com.supinfo.supcourses.service.UserService;
 import java.io.IOException;
