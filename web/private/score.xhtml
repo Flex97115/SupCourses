@@ -23,8 +23,19 @@ and open the template in the editor.
     <h:body>
         <ui:include src="header.xhtml" />
         <b:container fluid="true" style="padding: 50px;">
+            <b:row>
             <h2>Vous avez un score de : </h2>
             <h3 style="color: red;">#{Score.score} / #{Score.numQuestion}</h3>
+            </b:row>
+            <b:row>
+                <b:column medium-screen="3">
+            <b:form>
+                <b:commandButton value="Back to course" look="info" style="width:100%" action="#{Courses.goToCourse}">
+                </b:commandButton>
+            </b:form>
+                    </b:column>
+             </b:row>
         </b:container>
+
     </h:body>
 </html>
