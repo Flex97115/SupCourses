@@ -42,6 +42,7 @@ public class LoginController implements Serializable {
             ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
             Map<String, Object> sessionMap = externalContext.getSessionMap();
             sessionMap.put("user", user);
+            user = new User();
             return "/private/index?faces-redirect=true";
         } 
         user = new User();

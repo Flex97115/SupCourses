@@ -128,7 +128,78 @@ public class SupCoursesServletContextListener implements ServletContextListener 
                 quiz.setQuestions(questions);
                 course.setQuiz(quizService.addQuiz(quiz));
                 courseService.updateCourse(course);
+                
 
+            } catch (IOException ex) {
+                Logger.getLogger(SupCoursesServletContextListener.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            relativeWebPath = "/resources/txt/2.txt";
+            absoluteDiskPath = sce.getServletContext().getRealPath(relativeWebPath);
+            path = Paths.get(absoluteDiskPath);
+            try {
+                String content = Files.lines(path, StandardCharsets.UTF_8).collect(joining(" "));
+                Course course = new Course();
+                course.setTitle("Installer python sous mac");
+                course.setContent(content);
+                courseService.addCourse(course);
+                Quiz quiz = new Quiz();
+                quiz.setCourse(course);
+                List<Question> questions = new ArrayList<>();
+                Question q1 = new Question("Il y a une seul manière d'installer python ?", false);
+                q1 = questionService.addQuestion(q1);
+                questions.add(q1);
+                Question q2 = new Question("On peut installer qu'une version de python ?", false);
+                q2 = questionService.addQuestion(q2);
+                questions.add(q2);
+                Question q3 = new Question("Homebrew nous permet d'installer python en ligne de commande ?", true);
+                q3 = questionService.addQuestion(q3);
+                questions.add(q3);
+                Question q4 = new Question("La commande 'brew' permet d'appeler Homebrew  ?", true);
+                q4 = questionService.addQuestion(q4);
+                questions.add(q4);
+                Question q5 = new Question("Il est préférable d'utiliser Homebrew pour l'installation de python ?", true);
+                q5 = questionService.addQuestion(q5);
+                questions.add(q5);
+                quiz.setQuestions(questions);
+                course.setQuiz(quizService.addQuiz(quiz));
+                courseService.updateCourse(course);
+                
+            } catch (IOException ex) {
+                Logger.getLogger(SupCoursesServletContextListener.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            relativeWebPath = "/resources/txt/3.txt";
+            absoluteDiskPath = sce.getServletContext().getRealPath(relativeWebPath);
+            path = Paths.get(absoluteDiskPath);
+            try {
+                String content = Files.lines(path, StandardCharsets.UTF_8).collect(joining(" "));
+                Course course = new Course();
+                course.setTitle("Installer SQLite sous mac");
+                course.setContent(content);
+                courseService.addCourse(course);
+                Quiz quiz = new Quiz();
+                quiz.setCourse(course);
+                List<Question> questions = new ArrayList<>();
+                Question q1 = new Question("SQLite est moteur de base de donnée relationelle léger ?", true);
+                q1 = questionService.addQuestion(q1);
+                questions.add(q1);
+                Question q2 = new Question("On peut manipuler une base de donnée SQLite avec le langage SQL ?", true);
+                q2 = questionService.addQuestion(q2);
+                questions.add(q2);
+                Question q3 = new Question("Homebrew nous permet d'installer SQLite en ligne de commande ?", true);
+                q3 = questionService.addQuestion(q3);
+                questions.add(q3);
+                Question q4 = new Question("La commande 'brew' permet d'appeler Homebrew  ?", true);
+                q4 = questionService.addQuestion(q4);
+                questions.add(q4);
+                Question q5 = new Question("SQLite est beaucoup utilisé sur les applications mobiles ?", true);
+                q5 = questionService.addQuestion(q5);
+                questions.add(q5);
+                quiz.setQuestions(questions);
+                course.setQuiz(quizService.addQuiz(quiz));
+                courseService.updateCourse(course);
+                
             } catch (IOException ex) {
                 Logger.getLogger(SupCoursesServletContextListener.class.getName()).log(Level.SEVERE, null, ex);
             }

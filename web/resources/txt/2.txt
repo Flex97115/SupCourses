@@ -1,0 +1,24 @@
+Introduction
+Dans cet article nous allons voir comment installer Python avec une machine possédant Mac OS comme système d’exploitation. Nous utiliserons Homebrew car il est plus simple de gérer les paquets à l’aide de cet outil.
+
+Homebrew
+Homebrew est un gestionnaire de paquet pour mac. Il permet de d’installer, de mettre à jour et de supprimer des paquets assez simplement en ligne de commande. Il est préférable d’utiliser Homebrew pour installer des paquets comme Python car la gestion du paquet sera plus simple qu’utiliser l’installateur disponible sur le site officiel.
+Installer homebrew
+
+Nous allons procéder à l’installation d’Homebrew. Pour cela ouvrez un terminal et entrez la commande ci-dessous :
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+Ce script va télécharger le script d’installation d’Homebrew et l’installer à l’aide de Ruby. Une fois la commande exécuté et fini, tapez cette commande afin de savoir si Homebrew a bien été installé sur votre machine :
+brew --version
+Si vous avez une réponse de la part de votre console cela veut dire qu’Homebrew a bien été installé sur votre machine, sinon recommencer la procédure.
+Installer Python
+Une fois Homebrew installé nous allons installer python 3 via Homebrew, tapez la commande suivante dans votre terminal :
+brew install python3
+Si vous souhaitez installer python 2 :
+brew install python
+Ceci lancera l’installation de Python via Homebrew. Une fois la commande terminée, tapez dans votre terminal :
+python
+Si vous avez une réponse c’est que Python a bien été installé sur votre machine. Pour sortir de l’interpréteur python tapez « exit() » ou fermez le terminal.
+Conclusion
+Dans cet article nous avons appris comment installer simplement python 2 ou python 3 avec homebrew. Pensez à mettre à jour brew en tapant la commande :
+brew update
+Afin d’avoir le moins de bug possible lors de vos gestions de paquet.

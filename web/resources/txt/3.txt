@@ -1,0 +1,18 @@
+Introduction
+Dans cet article nous allons voir comment installer SQLite avec une machine possédant Mac OS comme système d’exploitation. Nous utiliserons Homebrew car il est plus simple de gérer les paquets à l’aide de cet outil. SQLite est une bibliothèque qui implémente un moteur de base de données relationnelle léger manipulable avec des commandes en langage SQL. Il est souvent utilisé sur mobile dû à sa légèreté, notamment dû au fait que cette bibliothèque émane du langage C.
+Installer homebrew
+Nous allons procéder à l’installation d’Homebrew. Pour cela ouvrez un terminal et entrez la commande ci-dessous :
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+Ce script va télécharger le script d’installation d’Homebrew et l’installer à l’aide de Ruby. Une fois la commande exécuté et fini, tapez cette commande afin de savoir si Homebrew a bien été installé sur votre machine :
+brew --version
+Si vous avez une réponse de la part de votre console cela veut dire qu’Homebrew a bien été installé sur votre machine, sinon recommencer la procédure.
+Installer SQLite
+Une fois Homebrew installé nous allons installer SQLite via Homebrew, tapez la commande suivante dans votre terminal :
+brew install sqlite
+Ceci lancera l’installation de SQLite via Homebrew. Une fois la commande terminée, tapez dans votre terminal :
+sqlite3 --version
+Si vous avez une réponse c’est que SQLite a bien été installé sur votre machine.
+Conclusion
+Dans cet article nous avons appris comment installer simplement SQLite avec homebrew. Pensez à mettre à jour brew en tapant la commande :
+brew update
+Afin d’avoir le moins de bug possible lors de vos gestions de paquet.

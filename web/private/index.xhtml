@@ -16,7 +16,7 @@ and open the template in the editor.
     </h:head>
     <h:body>
         <ui:include src="header.xhtml" />
-        <b:container fluid="true">
+        <b:container>
             
             <b:dataTable value="#{Courses.coursesModel}" var="course" >
                 <b:dataTableColumn>
@@ -26,16 +26,8 @@ and open the template in the editor.
                 <b:dataTableColumn>
                     <f:facet name="header"> Action </f:facet>
                     <b:form>
-                    <c:choose>
-                    <c:when test="#{Courses.isViewedCourse()}">
-                        <b:commandButton value="Take this course" look="danger" style="width:100%" action="#{Courses.goToCourse}">
-                        </b:commandButton>
-                    </c:when>
-                    <c:otherwise>
                         <b:commandButton value="Take this course" look="success" style="width:100%" action="#{Courses.goToCourse}">
                         </b:commandButton>
-                    </c:otherwise>
-                    </c:choose>
                     </b:form>
                 </b:dataTableColumn>
             </b:dataTable>

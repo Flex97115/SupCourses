@@ -46,6 +46,10 @@ public class QuizController implements Serializable {
         
     }
     
+    public String goToCourses(){
+        return "index?faces-redirect=true";
+    }
+    
     public String submit(){     
         //Calcule score comparing user response to real response
         setScore(questions.stream()

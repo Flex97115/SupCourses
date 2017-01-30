@@ -77,21 +77,7 @@ public class CoursesController implements Serializable {
     public String goToCourse(){        
         course = coursesModel.getRowData();
         setCourseId(course.getId().toString());
-        User current = getUser();
-        
-        //Can't compare course without overwriting method use id instead
-        List<Long> cIds =  getUser().getViewedCourses().stream()
-            .map(c1 -> { return c1.getId();})
-            .collect(Collectors.toList());
-        
-        if(!cIds.contains(course.getId())){
-            if(current.getViewedCourses().isEmpty()){
-                current.setViewedCourses(Arrays.asList(course));
-            } else {
-                current.getViewedCourses().add(course);
-            }
-            userService.updateUser(current);
-        }
+      
         return course != null ? "course?faces-redirect=true&includeViewParams=true" : "";
     }
     
