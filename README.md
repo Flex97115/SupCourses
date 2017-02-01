@@ -10,10 +10,10 @@ Les utilisateurs suivant sont automatiquement créé :
   - email: __admin@supinfo.com__
   - mot de passe: __admin__
 - writer :
-  - email: __writer@supinfo.com __
+  - email: __writer@supinfo.com__
   - mot de passe: __writer__
 - student :
-  - email: __student@supinfo.com __
+  - email: __student@supinfo.com__
   - mot de passe: __student__
 
 ## Membres du groupe
